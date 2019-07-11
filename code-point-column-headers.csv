@@ -1,0 +1,2 @@
+PC,PQ,PR,TP,DQ,RP,BP,PD,MP,UM,EA,NO,CY,RH,LH,CC,DC,WC,LS
+Postcode,Positional_quality_indicator,PO_Box_indicator,Total_number_of_delivery_points,Delivery_points_used_to_create_the_CPLC,Domestic_delivery_points,Non_domestic_delivery_points,PO_Box_delivery_points,Matched_address_premises,Unmatched_delivery_points,Eastings,Northings,Country_code,NHS_regional_HA_code,NHS_HA_code,Admin_county_code,Admin_district_code,Admin_ward_code,Postcode_type
