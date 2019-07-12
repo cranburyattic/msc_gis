@@ -4,7 +4,6 @@ docker run \
     --volume=$HOME/msc/data:/data \
     --volume=$HOME/msc/logs:/logs \
     --volume=$HOME/msc/conf:/conf \
-    --volume=/Users/phirow/Development/neo4j_msc:/plugins \
     --volume=$HOME/local_import_dir:/var/lib/neo4j/import \
     --user 1000:1000 \
     neo4j-algo

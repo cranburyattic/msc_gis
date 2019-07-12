@@ -1,0 +1,55 @@
+CREATE INDEX ON :Station(name)
+CREATE INDEX ON :Station(location)
+CREATE INDEX ON :Postcode(location)
+CREATE INDEX ON :Postcode(postcode)
+
+--CREATE THE STATIONS
+
+USING PERIODIC COMMIT 500
+LOAD CSV WITH HEADERS FROM "file:///london-stations.csv" AS csvline
+MERGE (s:Station:Tube { name : csvline.Station, postcode : replace(csvline.Postcode," ",""), displayPostcode : csvline.Postcode, location : point({ longitude: toFloat(csvline.Longitude), latitude: toFloat(csvline.Latitude)})})
+
+-- LINK THE STATIONS TO EACH OTHER
+USING PERIODIC COMMIT 500
+LOAD CSV WITH HEADERS FROM "file:///london-tube-lines.csv" AS row
+MATCH (to:Station { name : row.To}),(from:Station { name : row.From})
+CREATE (from)-[:LINE { name : row.Line}]->(to)
+
+-- CREATE THE LINK BETWEEN STATION AND LINE
+USING PERIODIC COMMIT 500
+LOAD CSV WITH HEADERS FROM "file:///london-tube-lines.csv" AS row
+MATCH (to:Station { name : row.To}),(from:Station { name : row.From})
+MERGE (l:Line { name :row.Line})
+MERGE (l)<-[:IS_ON]-(to)
+MERGE (l)<-[:IS_ON]-(from)
+
+-- ADD DISTANCES BETWEEN STATIONS TO LINE RELATIONSHIP
+MATCH (from:Station)-[l:LINE]->(to:Station)
+WITH l, distance(from.location, to.location) AS d
+SET l.distance = d
+
+-- LOAD POSTCODES
+USING PERIODIC COMMIT 250
+LOAD CSV WITH HEADERS FROM "file:///postcode_with_projections.csv" AS row
+CREATE (p:Postcode { postcode : replace(row.Postcode," ",""), displayPostcode : row.Postcode, location : point({longitude : toFloat(row.longitude), latitude : toFloat(row.latitude)})})
+
+call apoc.periodic.iterate("MATCH (p:Postcode) 
+WITH p
+MATCH (l:Line)<-[:IS_ON]-(s) WHERE DISTANCE (s.location, p.location) <= 500 RETURN p,s",
+"MERGE (p)-[:IS_WITHIN { distance : 500}]->(s)",{batchSize : 5000, iterateList: true}) yield batches, total return batches, total 
+
+
+call apoc.periodic.iterate("MATCH (p:Postcode) 
+WITH p
+MATCH (l:Line)<-[:IS_ON]-(s) WHERE DISTANCE (s.location, p.location) <= 500 RETURN p,s",
+"MERGE (p)-[:IS_WITHIN { distance : 500}]->(s)",{batchSize : 5000, iterateList: true}) yield batches, total return batches, total 
+
+call apoc.periodic.iterate("MATCH (p:Postcode) 
+WITH p
+MATCH (l:Line)<-[:IS_ON]-(s) WHERE DISTANCE (s.location, p.location) >= 1000  AND DISTANCE (s.location, p.location) < 1500 RETURN p,s",
+"MERGE (p)-[:IS_WITHIN { distance : 500}]->(s)",{batchSize : 5000, iterateList: true}) yield batches, total return batches, total 
+
+
+-- CREATE CITY CENTRE - TRAFALGER SQUARE
+
+CREATE (c:City {name : "London", location : point({longitude : -0.1269819, latitude : 51.5073423})}) RETURN c;
