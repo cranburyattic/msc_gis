@@ -5,5 +5,7 @@
 /output
 /jars/*.jar
 /London-wards-2018_ESRI
+/csvs
 
 pid.txt
+geo.py
