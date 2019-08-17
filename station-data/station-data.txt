@@ -1,2 +1,54 @@
+Download the following data for the stations
+
 https://www.doogal.co.uk/london_stations.php
+
+Download Station Data and Tube Line Data
+
 http://data.crossrail.co.uk/datasets/2bd18cc56dfb407181cbd0068845fe21_0
+
+The station data should be combined into stations.csv
+
+The following should be added to the tub line data to link the stations together
+
+Crossrail,Reading,Twyford
+Crossrail,Twyford,Maidenhead
+Crossrail,Maidenhead,Taplow
+Crossrail,Taplow,Burnham
+Crossrail,Burnham,Slough
+Crossrail,Slough,Langley
+Crossrail,Langley,Iver
+Crossrail,Iver,West Drayton
+Crossrail,West Drayton,Hayes and Harlington
+Crossrail,Hayes and Harlington,Southall
+Crossrail,Southall,Hanwell
+Crossrail,Hanwell,West Ealing
+Crossrail,West Ealing,Ealing Broadway
+Crossrail,Ealing Broadway,Acton Main Line
+Crossrail,Acton Main Line,Paddington
+Crossrail,Paddington,Bond Street
+Crossrail,Bond Street,Tottenham Court Road
+Crossrail,Tottenham Court Road,Farringdon
+Crossrail,Farringdon,Liverpool Street
+Crossrail,Liverpool Street,Whitechapel
+Crossrail,Whitechapel,Stratford
+Crossrail,Stratford,Maryland
+Crossrail,Maryland,Forest Gate
+Crossrail,Forest Gate,Manor Park
+Crossrail,Manor Park,Ilford
+Crossrail,Ilford,Seven Kings
+Crossrail,Seven Kings,Goodmayes
+Crossrail,Goodmayes,Chadwell Heath
+Crossrail,Chadwell Heath,Romford
+Crossrail,Romford,Gidea Park
+Crossrail,Gidea Park,Harold Wood
+Crossrail,Harold Wood,Brentwood
+Crossrail,Brentwood,Shenfield
+Crossrail,Whitechapel,Canary Wharf
+Crossrail,Canary Wharf,Custom House
+Crossrail,Custom House,Woolwich Arsenal
+Crossrail,Woolwich Arsenal,Abbey Wood
+Crossrail,Hayes and Harlington,Heathrow Terminals 1 2 3
+Crossrail,Heathrow Terminals 1 2 3,Heathrow Terminal 4
+Crossrail,Heathrow Terminals 1 2 3,Heathrow Terminal 5
+
+
