@@ -1,4 +1,11 @@
 The sold price data is retrieved from the Land Registry
+In order to retrieve the house price data, goto the following download.
+
 http://prod.publicdata.landregistry.gov.uk.s3-website-eu-west-1.amazonaws.com/pp-complete.csv
 
+More information can be found here.
+
+https://www.gov.uk/government/statistical-data-sets/price-paid-data-downloads#single-file
+
 The pp-complete.csv file should be added to THIS directory
+
