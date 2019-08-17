@@ -1,7 +1,7 @@
-CREATE INDEX ON :Station(name)
-CREATE INDEX ON :Station(location)
-CREATE INDEX ON :Postcode(location)
-CREATE INDEX ON :Postcode(postcode)
+    CREATE INDEX ON :Station(name)
+    CREATE INDEX ON :Station(location)
+    CREATE INDEX ON :Postcode(location)
+    CREATE INDEX ON :Postcode(postcode)
 
 --CREATE THE STATIONS
 
